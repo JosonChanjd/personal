@@ -5,6 +5,7 @@ node_modules/
 # 构建产物
 docs/.vitepress/dist/
 docs/.vitepress/cache/
+docs/.vitepress/.temp/
 
 # 由 scripts/gen.mjs 自动生成，无需提交
 docs/.vitepress/sidebar.json

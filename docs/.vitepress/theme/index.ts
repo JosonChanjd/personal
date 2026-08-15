@@ -1,7 +1,7 @@
 import DefaultTheme from 'vitepress/theme'
 import type { Theme } from 'vitepress'
-import { defineComponent, h, nextTick, onMounted } from 'vue'
-import { useRouter } from 'vitepress'
+import { defineComponent, h, nextTick, onMounted, watch } from 'vue'
+import { useRoute } from 'vitepress'
 import './style.css'
 
 import RelatedPosts from './components/RelatedPosts.vue'
@@ -39,16 +39,14 @@ async function loadMermaid() {
 async function renderMermaid() {
   if (typeof window === 'undefined') return
   const m = await loadMermaid()
-  const pres = Array.from(document.querySelectorAll<HTMLElement>('pre')).filter((pre) => {
-    const cls = pre.className || ''
-    const code = pre.querySelector('code')
-    const codeCls = code ? code.className || '' : ''
-    return cls.includes('language-mermaid') || codeCls.includes('language-mermaid')
-  })
-  for (const pre of pres) {
-    if (pre.dataset.mermaidDone) continue
-    pre.dataset.mermaidDone = '1'
-    const text = pre.textContent || ''
+  // VitePress 会把 ```mermaid 渲染为 <div class="language-mermaid"><pre>...</pre></div>
+  const containers = Array.from(document.querySelectorAll<HTMLElement>('.language-mermaid')).filter(
+    (el) => !el.dataset.mermaidDone
+  )
+  for (const container of containers) {
+    container.dataset.mermaidDone = '1'
+    const code = container.querySelector('code')
+    const text = (code ? code.textContent : container.textContent) || ''
     if (!text.trim()) continue
     try {
       const id = 'mm-' + Math.random().toString(36).slice(2, 10)
@@ -56,10 +54,10 @@ async function renderMermaid() {
       const wrap = document.createElement('div')
       wrap.className = 'mermaid-wrap'
       wrap.innerHTML = svg
-      pre.replaceWith(wrap)
+      container.replaceWith(wrap)
     } catch (err) {
       console.error('[mermaid] 渲染失败：', err)
-      pre.classList.add('mermaid-failed')
+      container.classList.add('mermaid-failed')
     }
   }
 }
@@ -67,10 +65,16 @@ async function renderMermaid() {
 const MermaidHook = defineComponent({
   name: 'MermaidHook',
   setup() {
-    const router = useRouter()
-    const run = () => nextTick(() => renderMermaid())
+    const route = useRoute()
+    const run = () => {
+      nextTick(() => {
+        if (typeof window !== 'undefined') {
+          requestAnimationFrame(() => renderMermaid())
+        }
+      })
+    }
     onMounted(run)
-    router.afterEach(run)
+    watch(() => route.path, run)
     return () => null
   }
 })
