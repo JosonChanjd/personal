@@ -1,0 +1,17 @@
+{
+  "name": "byte-log",
+  "version": "1.0.0",
+  "private": true,
+  "description": "科技风格个人博客：知识积累 · 随笔 · 文档库(NAS) · 搜索 · 自动关联 · GitHub 风格动态",
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/gen.mjs && vitepress dev docs",
+    "build": "node scripts/gen.mjs && vitepress build docs",
+    "preview": "vitepress preview docs",
+    "gen": "node scripts/gen.mjs"
+  },
+  "devDependencies": {
+    "mermaid": "^11.16.1",
+    "vitepress": "^1.6.4"
+  }
+}

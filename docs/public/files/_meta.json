@@ -1,0 +1,18 @@
+{
+  "/files/sample-report.pdf": {
+    "description": "示例 PDF 报告（由构建脚本自动生成）",
+    "tags": ["示例", "PDF"]
+  },
+  "/files/README.md": {
+    "description": "文档库使用说明",
+    "tags": ["说明", "Markdown"]
+  },
+  "/files/notes.txt": {
+    "description": "示例笔记文本",
+    "tags": ["笔记", "文本"]
+  },
+  "/files/architecture.svg": {
+    "description": "文件归档流程示意图",
+    "tags": ["图示", "SVG"]
+  }
+}
