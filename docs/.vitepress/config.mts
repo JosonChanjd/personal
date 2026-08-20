@@ -19,12 +19,12 @@ const generatedSidebar = loadGeneratedSidebar()
 
 // github.io 部署说明：若是「用户主页」仓库（<user>.github.io），base 保持 '/'；
 // 若是「项目页」仓库（<user>.github.io/<repo>/），请把 base 改成 '/<repo>/'。
-const base = '/'
+const base = '/personal/'
 
 export default defineConfig({
   lang: 'zh-CN',
-  title: 'ByteLog',
-  description: '科技风格个人博客：知识积累 · 随笔 · 文档库 · 搜索 · 自动关联',
+  title: 'Jie-OceanGull',
+  description: '科技平台：知识积累 · 随笔 · 文档库 · 搜索 · 自动关联',
   base,
   cleanUrls: true,
   appearance: 'dark',

@@ -4,9 +4,9 @@ title: ByteLog
 titleTemplate: 科技风格个人博客
 
 hero:
-  name: ByteLog
+  name: OG-JIE
   text: 知识 · 随笔 · 存档
-  tagline: 一个面向 GitHub Pages 的科技风格个人博客 —— 记录学习、沉淀知识、归档文档。
+  tagline: 江南无所有，聊赠一枝春
   actions:
     - theme: brand
       text: 开始阅读

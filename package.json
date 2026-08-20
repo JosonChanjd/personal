@@ -8,6 +8,7 @@
     "dev": "node scripts/gen.mjs && vitepress dev docs",
     "build": "node scripts/gen.mjs && vitepress build docs",
     "preview": "vitepress preview docs",
+    "serve": "node scripts/serve.mjs",
     "gen": "node scripts/gen.mjs"
   },
   "devDependencies": {

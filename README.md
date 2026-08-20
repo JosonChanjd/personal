@@ -76,11 +76,17 @@ pin: true   # 可选，置顶
 2. 编辑 `docs/public/files/_meta.json` 添加描述与标签；
 3. `npm run dev` / `npm run build` 会自动生成清单，在「文档库」页面预览/下载。
 
-## 部署到 GitHub Pages
+## 部署到 GitHub Pages（GitHub Actions 自动部署）
 
-1. 若为**项目页**仓库（`<user>.github.io/<repo>/`），将 `docs/.vitepress/config.mts` 的 `base` 改为 `/<repo>/`；用户主页仓库保持 `/` 即可；
-2. 执行 `npm run build`；
-3. 把 `docs/.vitepress/dist` 内容推送到 `gh-pages` 分支（或配置 GitHub Actions 自动构建），并在仓库 Settings → Pages 选择该分支。
+本项目已包含 `.github/workflows/deploy.yml`，只需：
+
+1. 将 `docs/.vitepress/config.mts` 的 `base` 设为 `/<仓库名>/`（项目页，如 `/personal/`）或 `/`（用户主页）；
+2. 推送到 GitHub；
+3. 在仓库 Settings → Pages 中把 **Source** 设为 **GitHub Actions**。
+
+之后每次 push 都会自动构建并发布，无需手动维护 `dist`。
+
+> 手动方式：`npm run build` 后把 `docs/.vitepress/dist` 推送到 `gh-pages` 分支，并在 Pages 中选择该分支。
 
 ## 说明
 
